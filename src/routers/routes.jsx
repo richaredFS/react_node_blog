@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Redirect, IndexRoute} from 'react-router';
+import {Route,IndexRoute} from 'react-router';
 import App from '../components/App';
 
 //登录与注册页面路由
@@ -50,7 +50,8 @@ const blogDetail = (location, callback) => {
 const RouteConfig = (
     <Route>
         <Route path='/' component={App}>
-            {/*<IndexRoute  getComponent={vod}/>*/}
+            {/*设置indexRoute可以解决首页白屏的问题*/}
+            <IndexRoute  getComponent={home}/>
             <Route path="register" getComponent={register}/>
             <Route path="login" getComponent={login}/>
             <Route path="home" getComponent={home}/>

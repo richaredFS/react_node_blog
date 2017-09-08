@@ -1,10 +1,14 @@
 import React from 'react';
-import { Form, Input, Row, Col, Button ,message} from 'antd';
+import { Form, Input, Button ,message} from 'antd';
 import * as commonAction from '../../actions/commonAction';
 import {post} from '../../config/tool';
 import {hashHistory} from 'react-router';
 import {connect} from 'react-redux';
 const FormItem = Form.Item;
+message.config({
+    top: 300,
+    duration:1
+});
 
 class Publish extends React.Component{
     constructor(props){
@@ -13,22 +17,28 @@ class Publish extends React.Component{
     }
     handleSubmit=(e)=>{
         e.preventDefault();
-        console.log('收到表单值：', this.props.form.getFieldsValue());
-        post('http://localhost:8080/publish', {
-            title:this.props.form.getFieldsValue().title,
-            description:this.props.form.getFieldsValue().description,
-            content:this.props.form.getFieldsValue().content,
-            label:this.props.form.getFieldsValue().label,
-            username:localStorage.getItem("username"),
-            uid:localStorage.getItem("uid")
-        }).then((res) => {
-            if (res.result) {
-                message.success('发布成功')
-                hashHistory.push('/blogList');
-            }else{
-                message.error('发布失败！')
-            }
-        })
+        if(localStorage.getItem("username")===null){
+            message.error('请先登录再发表文章');
+            //好像没生效
+            setTimeout(hashHistory.push("/login"),5000)
+
+        }else{
+            post('http://localhost:8080/publish', {
+                title:this.props.form.getFieldsValue().title,
+                description:this.props.form.getFieldsValue().description,
+                content:this.props.form.getFieldsValue().content,
+                label:this.props.form.getFieldsValue().label,
+                username:localStorage.getItem("username"),
+                uid:localStorage.getItem("uid")
+            }).then((res) => {
+                if (res.result) {
+                    message.success('发布成功')
+                    hashHistory.push('/blogList');
+                }else{
+                    message.error('发布失败！')
+                }
+            })
+        }
     };
 
     render(){

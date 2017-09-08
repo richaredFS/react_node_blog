@@ -41,23 +41,20 @@ class ListBox extends React.Component {
     handleClick = (event)=>{
         event = event.nativeEvent;
         const li = event.target.parentNode;
-        this.fetchInfos(li.id);
         //因为Link标签的to属性带不上变量，所以用这种办法
         hashHistory.push('/blogList/'+li.id);
-    };
-    fetchInfos =(arg)=>{
         const param = {
-            start:0,
-            num:0,
-            id:arg
+            id:li.id
         };
-        //根据id获取博文
+        this.fetchInfos(param)
+    };
+    fetchInfos =(param)=>{
         this.props.fetchData(
-            '/blogList/'+arg,
+            '/flushPv',
             'POST',
-            'getBlogInfos',
+            'getPvOrCommentInfos',
             param
-        )
+        );
     };
     render() {
         return (

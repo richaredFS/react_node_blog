@@ -49,20 +49,17 @@ class App extends React.Component {
         }
         return {selectedKeys,selectedItem};
     };
-    login = ()=>{
-        console.log("正在请求登录")
-    };
-    register = ()=>{
-        console.log("正在请求注册")
-    };
     handleClick = ()=>{
         let urlHash=window.location.hash;
         if(urlHash.indexOf('home')>0){
-            this.state.selectedItem='博客首页'
+            // this.state.selectedItem='博客首页';
+            this.setState({selectedItem:'博客首页'})
         }else if(urlHash.indexOf('blogList')>0){
-            this.state.selectedItem='所有博文'
+            // this.state.selectedItem='所有博文'
+            this.setState({selectedItem:'所有博文'})
         }else{
-            this.state.selectedItem='关于我'
+            // this.state.selectedItem='关于我'
+            this.setState({selectedItem:'关于我'})
         }
     };
     loginOut = (e)=>{
@@ -70,7 +67,10 @@ class App extends React.Component {
             if(res.result){
                 localStorage.clear();
                 localStorage.setItem("login","false");
-                window.location.reload()
+                // setState可以手动触发render，而且setState的参数不仅仅是对象，还可以是函数
+                this.setState(function(){
+                    localStorage.setItem("login","false")
+                })
             }
         })
     };
@@ -99,8 +99,8 @@ class App extends React.Component {
                         </div>
                     ):(
                         <div className="buttons">
-                            <Button type="primary" className="login-button" onClick={this.login}><Link to="/login" style={{textDecoration:'none'}}>登录</Link></Button>
-                            <Button type="primary" className="login-button" onClick={this.register}><Link to="/register" style={{textDecoration:'none'}}>注册</Link></Button>
+                            <Button type="primary" className="login-button"><Link to="/login" style={{textDecoration:'none'}}>登录</Link></Button>
+                            <Button type="primary" className="login-button"><Link to="/register" style={{textDecoration:'none'}}>注册</Link></Button>
                         </div>
                     )}
 
@@ -118,7 +118,7 @@ class App extends React.Component {
                         <Breadcrumb style={{ margin: '12px 0' }}>
                             <Breadcrumb.Item><span className="subtitle">{this.state.selectedItem}</span></Breadcrumb.Item>
                         </Breadcrumb>
-                        <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
+                        <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 380}}>
                             {this.props.children}
                         </Content>
                         <Footer style={{ textAlign: 'center' }}>

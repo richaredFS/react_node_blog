@@ -1,9 +1,7 @@
 import React from 'react';
 import { Button, Form, Input,message } from 'antd';
-import * as commonAction from '../../actions/commonAction';
 import {post} from '../../config/tool';
 import {hashHistory} from 'react-router';
-import {connect} from 'react-redux';
 const createForm = Form.create;
 const FormItem = Form.Item;
 
@@ -113,13 +111,13 @@ class Home extends React.Component{
             wrapperCol: { span: 12 },
         };
         return(
-            <div>
+            <div className="home-container">
                 <div className="home-picture">
                     <div className="picture">
-                        <img src={require('../../styles/images/github.png')}/>
+                        <img alt="" src={require('../../styles/images/github.png')}/>
                     </div>
                     <div className="description">
-                        github: <a href="http://www.baidu.com">http://github.com/richared</a>
+                        github: <a href="https://github.com/richaredFS">https://github.com/richaredFS</a>
                     </div>
                     <div className="description">
                         个人博客系统，主要分享react+redux+webpack+node技术栈，欢迎大家留言交流！

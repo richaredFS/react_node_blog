@@ -65,7 +65,7 @@ class BlogList extends React.Component{
                 <div className="blog-list-label">
                     <span style={{fontSize:'15px',fontWeight:'bold'}}>标签分类</span>
                     <div className="blog-label-container">
-                        {this.props.labelData.isFetching?<Spin/>:
+                        {this.props.labelData.isFetching?<Spin/>:this.props.labelData.totalNum===0?<div>暂无标签分类</div>:
                             this.props.labelData.labelList.map(item=>{
                                 return(
                                     // 在循环输出子组件的时候一定要加唯一的key属性，key={item}

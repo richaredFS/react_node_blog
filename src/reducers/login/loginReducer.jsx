@@ -16,6 +16,8 @@ function loginData (state = defaultState, action = {}){
                     //无需处理登录数据
                     break
                 }
+                default:
+                    return state;
             }
             return state.set(action.fetchName,action);
         case REQUEST_ERROR:

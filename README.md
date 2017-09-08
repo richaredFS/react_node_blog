@@ -5,3 +5,7 @@ react_node_blog client 客户端
    ---cnpm install安装依赖
    ---cnpm run start启动开发环境
    ---cnpm run build 执行打包脚本
+---2017/09/08新增功能和修复bug：
+   ---评论功能
+   ---浏览数功能
+   ---修复退出之后的bug，原先是强制刷新浏览器
